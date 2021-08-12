@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -51,6 +53,11 @@ public class CommentService {
                 .orElseThrow(()->new PostNotFoundException("post not found"));
         List<Comment> comments = commentRepository.findAllByPost(post);
         return comments;
+    }
+
+    public void deleteComment(Long commentId){
+        Optional<Comment> comment = commentRepository.findById(commentId);
+        comment.ifPresent(commentRepository::delete);
     }
     private UserApp getUserByPrincipal(Principal principal) {
         String username = principal.getName();
