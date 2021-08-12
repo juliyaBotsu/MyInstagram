@@ -67,4 +67,9 @@ public class UserService {
         return userRepository.findUserAppByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User can't found"));
     }
+
+    public UserApp getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(()->new UsernameNotFoundException("User can't be found"));
+    }
 }
