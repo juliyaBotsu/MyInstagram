@@ -29,16 +29,12 @@ import java.util.zip.Inflater;
 public class ImageUpdateService {
     public static final Logger LOG = LoggerFactory.getLogger(ImageUpdateService.class);
 
-    private final ImageRepository imageRepository;
-    private final UserRepository userRepository;
-    private final PostRepository postRepository;
-
     @Autowired
-    public ImageUpdateService(ImageRepository imageRepository, UserRepository userRepository, PostRepository postRepository) {
-        this.imageRepository = imageRepository;
-        this.userRepository = userRepository;
-        this.postRepository = postRepository;
-    }
+    private  ImageRepository imageRepository;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  PostRepository postRepository;
 
 
     private static byte[] decompressBytes(byte[] data) {
@@ -57,7 +53,7 @@ public class ImageUpdateService {
         return outputStream.toByteArray();
     }
 
-    public ImageModel uploadImageModel(MultipartFile file, Principal principal) throws IOException {
+    public ImageModel uploadImageModelToUser(MultipartFile file, Principal principal) throws IOException {
         UserApp user = getUserByPrincipal(principal);
         LOG.info("Uploading image profile to User {} " + user.getUsername());
         ImageModel userProfileImage = imageRepository.findByUserId(user.getId())
