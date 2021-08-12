@@ -65,6 +65,6 @@ public class UserService {
     private UserApp getUserByPrincipal(Principal principal) {
         String username = principal.getName();
         return userRepository.findUserAppByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User can't found"));
     }
 }
