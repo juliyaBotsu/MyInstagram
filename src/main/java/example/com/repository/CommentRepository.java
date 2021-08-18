@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@Qualifier("commentRepository")
+@Qualifier("commentRepositor")
 public interface CommentRepository extends JpaRepository<Comment,Long> {
     List<Comment> findAllByPost(Post post);
 
